@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+require('dotenv').load();
   
 const app = express();
   
@@ -17,6 +18,7 @@ app.get("/fibonachi", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/public/index.html");
 });
 app.post("/fibonachi", urlencodedParser, function (request, response) {
+    console.log(process.env.USER_SECRET_KEY);
     if(!request.body) return response.sendStatus(400);
     const number = request.body.number;
     let result = fib(number);
