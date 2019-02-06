@@ -1,8 +1,12 @@
-.main-form {
-    display: flex;
+form {
+	display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    width: 30%;
+    padding: 20px;
 }
 
-.input {
-	style="width: 200px;
+label {
+	display: flex;
+    align-items: center;
 }
