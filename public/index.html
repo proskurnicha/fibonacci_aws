@@ -3,12 +3,34 @@
 <head>
     <title>Nata</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-    <form action="/fibonachi" method="post">
-        <label>Enter number</label><br>
-        <input type="text" name="number" /><br><br>
-        <input type="submit" value="Get" />
-    </form>
+	<div class="main-form">
+		<form action="/fibonachi" method="post" name="fibonacciForm">
+	        <label>Enter number:</label>
+	        <br><br>
+	        <input class="form-control input" type="text" id="number" /><br><br>
+	        <input class="form-control input" type="submit" id="calculate"  value="Calculate" />
+	        <p id="result"></p>
+	    </form>
+	</div>
+    <script type="text/javascript">
+    	document.getElementById("calculate").addEventListener("click", function (e) {
+            e.preventDefault();
+            let number = document.forms["fibonacciForm"].elements["number"].value;
+            let numberJson = JSON.stringify({number: number});
+            let request = new XMLHttpRequest();
+
+            request.open("POST", "/fibonacci", true);   
+            request.setRequestHeader("Content-Type", "application/json");
+            request.addEventListener("load", function (response) {
+            	document.getElementById("result").innerHTML = `Result: ${JSON.parse(response.target.responseText)}`;
+            });
+            
+            request.send(numberJson);
+         });
+    </script>
 </body>
 </html>
